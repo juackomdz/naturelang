@@ -1,0 +1,20 @@
+FROM debian:bullseye-slim
+
+
+WORKDIR /nlang
+
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \ 
+        wget \
+        zlib1g-dev && \
+    rm -rf /var/lib/apt/lists/* && \
+    wget --no-check-certificate https://github.com/nature-lang/nature/releases/download/v0.5.0/nature-v0.5.0-linux-amd64.tar.gz && \
+    tar -xvzf nature-v0.5.0-linux-amd64.tar.gz && \
+    cp -r nature /usr/local/ && \
+    rm -rf /nlang
+
+ENV PATH="/usr/local/nature/bin:$PATH"
+
+
